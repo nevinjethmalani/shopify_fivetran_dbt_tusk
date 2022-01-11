@@ -1,0 +1,5 @@
+packages:
+  - package: fivetran/shopify_source
+    version: [">=0.6.0", "<0.7.0"]
+  - package: fivetran/shopify
+    version: [">=0.6.0", "<0.7.0"]
