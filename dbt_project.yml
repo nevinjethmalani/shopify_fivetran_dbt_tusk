@@ -24,15 +24,20 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
-
 config-version: 2
 
 vars:
     shopify_database: customreports
-    shopify_schema: tusk_shopify
+    #shopify_schema: tusk_shopify
 
 models:
   shopify:
-    +schema: dbt_report # leave blank for just the target_schema
+    +schema: "{% if var ('shopify_schema', 'tusk_shopify') == 'tusk_shopify' %} tusk_dbt_report {% elif var ('shopify_schema', 'prive_shopify') == 'prive_shopify' %} prive_dbt_report {% else %} dbt_report {% endif %}"
   shopify_source:
-    +schema: stg_dbt_report # leave blank for just the target_schema
+    +schema: "{% if var ('shopify_schema', 'tusk_shopify') == 'tusk_shopify' %} tusk_stg_dbt_report {% elif var ('shopify_schema', 'prive_shopify') == 'prive_shopify' %} prive_stg_dbt_report {% else %} stg_dbt_report {% endif %}"
+
+#models:
+  #shopify:
+    #+schema: dbt_report # leave blank for just the target_schema
+  #shopify_source:
+    #+schema: stg_dbt_report # leave blank for just the target_schema
