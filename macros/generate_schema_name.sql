@@ -7,7 +7,6 @@
 
     {%- else -%}
         {{ custom_schema_name }}
-        --{{ default_schema }}_{{ custom_schema_name | trim }}
 
     {%- endif -%}
 
